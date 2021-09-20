@@ -33,3 +33,47 @@ function takesnapshot(){
         synth.speak(utterthis);
     }
     
+    function check(){
+        img = document.getElementById("capture_image");
+        classifier.classify(img,gotResult);
+    }
+    
+    function gotResult(error, results){
+        if (error){
+            console.log(error);
+        }
+        else {
+            console.log(results);
+            document.getElementById("result_emotion_name1").innerHTML = results[0].label;
+            document.getElementById("result_emotion_name2").innerHTML = results[1].label;
+    
+            prediction1 = results[0].label;
+            prediction2 = results[1].label;
+    
+            speak();
+    
+            if(results[0].label == "OK"){
+                document.getElementById("update_emoji1").innerHTML = "&#128076;";
+            }
+    
+            if(results[0].label == "Peace"){
+                document.getElementById("update_emoji1").innerHTML = "&#9996;";
+            }
+    
+            if(results[0].label == "Thumbs Up"){
+                document.getElementById("update_emoji1").innerHTML = "&#128077;";
+            }
+    
+            if(results[1].label == "OK"){
+                document.getElementById("update_emoji2").innerHTML = "&#128076;";
+            }
+    
+            if(results[1].label == "Peace"){
+                document.getElementById("update_emoji2").innerHTML = "&#9996;";
+            }
+    
+            if(results[1].label == "Thumbs Up"){
+                document.getElementById("update_emoji2").innerHTML = "&#128077;";
+            }
+        }
+    }
